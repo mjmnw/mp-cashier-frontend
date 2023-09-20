@@ -1,0 +1,19 @@
+  <div className="flex flex-col w-[200px] bg-color-2 justify-center rounded-lg">
+                    <div className="w-full p-[10px] bg-transparent text-white flex items-center gap-1 cursor-pointer rounded-md focus:bg-gray-700 active:bg-color-1 outline-none group">
+                        <button className="relative w-full p-10 bg-transparent text-white flex items-center gap-5 cursor-pointer rounded-md focus:bg-gray-700 active:bg-color-1 outline-none group">
+                            menu
+                        </button>
+                    </div>
+                </div>
+
+
+
+
+<li className="w-max">
+                                    <a href="">
+                                        <div className="flex items-center gap-4 px-3 py-3">
+                                            <TbMoodSearch className="h-7 w-7"/>
+                                            <span className="">Reports</span>
+                                        </div>
+                                    </a>
+                                </li>
