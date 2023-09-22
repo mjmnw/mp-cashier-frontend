@@ -3,41 +3,61 @@ body {
 }
 
 .bg-color-1 {
-  background-color: #004225;
+  background-color: #016A70;
 }
 
 .bg-color-2 {
-  background-color: #F5F5DC;
+  background-color: #FFFFDD;
 }
 
 .bg-color-3 {
-  background-color: #FFB000;
+  background-color: #D2DE32;
 }
 
 .bg-color-4 {
-  background-color: #FFCF9D;
+  background-color: #A2C579;
 }
 
 .text-color-1 {
-  color: #004225;
+  color: #016A70;
 }
 
 .text-color-2 {
-  color: #F5F5DC;
+  color: #FFFFDD;
 }
 
 .text-color-3 {
-  color: #FFB000;
+  color: #D2DE32;
 }
 
 .text-color-4 {
-  color: #FFCF9D;
+  color: #A2C579;
 }
 
-
+/*Navbar Custon*/
 .compact-nav{
   transition: .4s;
 }
+
+/*Cart Custon*/
+.cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  min-height: 100vh;
+  padding: 20px;
+  background: var();
+  box-shadow: -2px 0 4px hsl(0, 4% 15% / 10%)
+}
+
+.cart-box {
+  display: grid;
+  grid-template-columns: 32% 50% 18%;
+  align-items: center;
+  gap: 1rem;
+}
+
 
 @keyframes App-logo-spin {
   from {

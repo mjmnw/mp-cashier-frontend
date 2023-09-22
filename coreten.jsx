@@ -152,3 +152,33 @@
 </div>
 </main>
 </div>
+
+
+<div className="cart bg-red-200 ">
+                <h2 className="text-center text-2xl font-bold mt-8">CART</h2>
+                {/* Ini isi cart*/}
+                <div className="">
+                    <div className="cart-box">
+                        cart box
+                        <img className="" src="" />
+                        <div className="">
+                            detal produk
+                            <div className="">cart produk detail</div>
+                            <div className="">cart produk price</div>
+                            <div className="">cart quantity</div>
+                        </div>
+                        {/* Ini remove cart*/}
+                        <div className="">icon remove cart</div>
+                    </div>
+                </div>
+                {/* Ini isi total*/}
+                <div className="">
+                    total
+                    <div>total title</div>
+                    <div>total price</div>
+                </div>
+                {/* Ini tombol buy*/}
+                <button className="">Buy</button>
+                {/* Ini tombol Close*/}
+                <button>icon sampah</button>
+            </div>
