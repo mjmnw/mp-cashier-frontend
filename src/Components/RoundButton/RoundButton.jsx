@@ -3,7 +3,7 @@ const RoundButton = (props) => {
         <div>
             <button
                 onClick={props.onClick}
-                className={`btn w-[50px] font-black rounded-full text-4xl text-white bg-green-600 hover:bg-green-600 ${props.style}`}
+                className={`btn w-[33px] h-[28px] items-center font-black rounded-xl text-md text-white bg-yellow-500 hover:bg-gray-800 ${props.style}`}
             >
                 {props.text}
             </button>

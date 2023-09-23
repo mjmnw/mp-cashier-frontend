@@ -14,7 +14,7 @@ const CartCard = (props) => {
     return (
         <div>
             <div className="px-5">
-                <div className="bg-white shadow-lg rounded-3xl flex">
+                <div className="bg-white shadow-lg rounded-3xl flex border mt-1">
                     <div className="flex items-center p-3">
                         <img
                             className="h-[100px] w-[100px] rounded-xl border"
@@ -37,7 +37,7 @@ const CartCard = (props) => {
                         </div>
                         <div className="flex gap-5 mt-2">
                             <RoundButton text="-" />
-                            <div className="flex items-center text-md">
+                            <div className="flex items-center text-xl">
                                 0 {props.quantity}
                             </div>
                             <RoundButton text="+" />

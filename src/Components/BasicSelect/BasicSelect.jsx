@@ -4,6 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { colors } from "@mui/material";
 
 export default function BasicSelect() {
     const [age, setAge] = React.useState("");
@@ -13,7 +14,7 @@ export default function BasicSelect() {
     };
 
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{ minWidth: 120, borderColor: 'grey.500'}}>
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label" sx={{fontSize: "13px", padding: "4px"}}>By Name</InputLabel>
                 <Select

@@ -1,69 +1,72 @@
 body {
-  background-color: #F5F5DC;
+    background-color: #f5f5dc;
 }
 
 .bg-color-1 {
-  background-color: #016A70;
+    background-color: #016a70;
 }
 
 .bg-color-2 {
-  background-color: #FFFFDD;
+    background-color: #ffffdd;
 }
 
 .bg-color-3 {
-  background-color: #D2DE32;
+    background-color: #d2de32;
 }
 
 .bg-color-4 {
-  background-color: #A2C579;
+    background-color: #a2c579;
+}
+
+.bg-color-5 {
+    background-color: white;
 }
 
 .text-color-1 {
-  color: #016A70;
+    color: #016a70;
 }
 
 .text-color-2 {
-  color: #FFFFDD;
+    color: #ffffdd;
 }
 
 .text-color-3 {
-  color: #D2DE32;
+    color: #d2de32;
 }
 
 .text-color-4 {
-  color: #A2C579;
+    color: #a2c579;
 }
 
 /*Navbar Custon*/
-.compact-nav{
-  transition: .4s;
+.compact-nav {
+    transition: 0.4s;
 }
 
 /*Cart Custon*/
 .cart {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 360px;
-  min-height: 100vh;
-  padding: 20px;
-  background: var();
-  box-shadow: -2px 0 4px hsl(0, 4% 15% / 10%)
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 360px;
+    min-height: 100vh;
+    padding: 20px;
+    background: var();
+    box-shadow: -2px 0 4px hsl(0, 4% 15% / 10%);
 }
 
 .cart-box {
-  display: grid;
-  grid-template-columns: 32% 50% 18%;
-  align-items: center;
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: 32% 50% 18%;
+    align-items: center;
+    gap: 1rem;
 }
 
-
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

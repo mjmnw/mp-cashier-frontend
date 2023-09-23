@@ -49,13 +49,13 @@ export default function LandingPage() {
     // }, []);
 
     return (
-        <div className="flex flex-col bg-yellow-900 w-full h-screen place-items-center pt-4">
-            <img
-                src="/image/Lucy_Sky-removebg-preview.png"
-                className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] object-contain"
-                alt=""
-            />
-            <div className="flex flex-col pb-2 mt-8 w-[380px] sm:w-[550px] sm:h-[300px]  xl:w-[600px] xl:h-[400px] rounded-xl bg-yellow-950 place-items-center">
+        <div className="flex flex-col bg-white w-full h-screen place-items-center pt-4">
+                <img
+                    src="/image/Lucy_Sky-removebg-preview.png"
+                    className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] object-contain"
+                    alt=""
+                />
+            <div className="bg-gradient-to-r from-yellow-950 to-yellow-700 flex flex-col pb-2 mt-8 w-[380px] sm:w-[550px] sm:h-[300px]  xl:w-[600px] xl:h-[400px] rounded-xl place-items-center">
                 <h1 className="text-white pt-2 sm:pt-4 text-3xl">Login</h1>
                 <div className="text-white pt-2 text-s text-center">
                     Welcome back! Please input your email and password to access

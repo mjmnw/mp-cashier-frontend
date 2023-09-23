@@ -6,10 +6,12 @@ import axios from "axios";
 import CategoryCard from "../../../Components/CategoryCard/CategoryCard";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import CartCard from "../../../Components/CartCard/CartCard";
+import "./index.css";
 
 export default function HomePageCashier() {
     const [categories, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
+    const [users, setUsers] = useState([])
 
     const getCategories = async () => {
         try {
@@ -41,12 +43,12 @@ export default function HomePageCashier() {
     }, []);
 
     return (
-        <div>
+        <div className="border bg-white h-[715px]">
             <NavbarCashier />
             <TopBar />
             <div className="ml-20 flex flex-row">
                 <div className="flex flex-col">
-                    <div className="flex flex-row gap-5 overflow-x-auto h-[50px] w-[1000px] text-black">
+                    <div className="flex flex-row gap-5 overflow-x-auto style-scrollbar h-[60px] w-[924px] text-black">
                         {categories.map((value, index) => {
                             return (
                                 <div key={index}>
@@ -57,8 +59,8 @@ export default function HomePageCashier() {
                             );
                         })}
                     </div>
-                    <div className="mt-5 h-[495px] w-[1000px]">
-                        <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto w-full">
+                    <div className="mt-2 h-[485px] w-[1000px]">
+                        <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full">
                             {products.map((value, index) => {
                                 return (
                                     <div key={index}>
