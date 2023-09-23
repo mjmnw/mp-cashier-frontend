@@ -11,7 +11,6 @@ import "./index.css";
 export default function HomePageCashier() {
     const [categories, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
-    const [users, setUsers] = useState([])
 
     const getCategories = async () => {
         try {

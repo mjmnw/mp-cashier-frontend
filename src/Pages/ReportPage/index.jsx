@@ -16,7 +16,7 @@ import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import Logout from "@mui/icons-material/Logout";
 import { mainListItems, secondaryListItems } from "./listItems";
 import Chart from "./chart";
 import Deposits from "./deposit";
@@ -31,8 +31,8 @@ function Copyright(props) {
             {...props}
         >
             {"Copyright © "}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
+            <Link color="inherit" href="http://localhost:3000">
+                Lucy Sky PWDK2502
             </Link>{" "}
             {new Date().getFullYear()}
             {"."}
@@ -124,11 +124,11 @@ export default function Dashboard() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            Dashboard
+                            Lucy Sky Dashboard
                         </Typography>
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
+                            <Badge color="secondary">
+                                <Logout />
                             </Badge>
                         </IconButton>
                     </Toolbar>

@@ -2,16 +2,16 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
 
-function Title(props) {
+function UserTitle(props) {
     return (
-        <Typography component="h2" variant="h1" color="primary" gutterBottom>
+        <Typography component="h2" variant="h10" color="primary" gutterBottom>
             {props.children}
         </Typography>
     );
 }
 
-Title.propTypes = {
+UserTitle.propTypes = {
     children: PropTypes.node,
 };
 
-export default Title;
+export default UserTitle;

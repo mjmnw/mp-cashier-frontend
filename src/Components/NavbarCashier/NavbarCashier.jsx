@@ -13,7 +13,7 @@ export default function NavbarCashier() {
                     <div className="">
                         <div className="h-16 border-b border-gray-300/40 flex items-center">
                             <a
-                                href=""
+                                href="/"
                                 className="block w-max px-2.5 flex items-center gap-3 text-color-1 text-l font-bold"
                             >
                                 <img src={Logo} class="h-11" alt="" />
@@ -24,7 +24,7 @@ export default function NavbarCashier() {
                             <ul className="px-1 -ml-px space-y-4 font-medium tracking-wide text-color-1">
                                 <li className="w-max space-y-4 group-hover:w-full">
                                     <a
-                                        href=""
+                                        href="/"
                                         className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
                                     >
                                         <div className="w-max flex items-center px-3 gap-4">
@@ -35,7 +35,7 @@ export default function NavbarCashier() {
                                 </li>
                                 <li className="w-max space-y-4 group-hover:w-full">
                                     <a
-                                        href=""
+                                        href="/"
                                         className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
                                     >
                                         <div className="w-max flex items-center px-3 gap-4">
@@ -46,7 +46,7 @@ export default function NavbarCashier() {
                                 </li>
                                 <li className="w-max space-y-4 group-hover:w-full">
                                     <a
-                                        href=""
+                                        href="/"
                                         className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
                                     >
                                         <div className="w-max flex items-center px-3 gap-4">
@@ -61,7 +61,7 @@ export default function NavbarCashier() {
                         </div>
                     </div>
                     <div className="py-4 border-t px-2 border-gray-300/40">
-                        <a href="">
+                        <a href="/">
                             <div className="w-max flex items-center gap-4">
                                 <img
                                     className="h-10 w-10 rounded-full"

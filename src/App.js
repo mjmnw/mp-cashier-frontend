@@ -5,6 +5,7 @@ import SentResetPasswordPage from "./Pages/SentResetPasswordPage";
 import HomePageCashier from "./Pages/HomePage/Cashier/index";
 import Dashboard from "./Pages/ReportPage";
 import FullFeaturedCrudGrid from "./Pages/ProfilePage/AdminProfilePage";
+import UserDataPage from "./Pages/UserDataPage";
 
 function App() {
     return (
@@ -13,8 +14,9 @@ function App() {
                 <Route path="/" element={<HomePageCashier />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/resetpassword" element={<SentResetPasswordPage />} />
-                <Route path="/report" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/admins" element={<FullFeaturedCrudGrid />} />
+                <Route path="/userslist" element={<UserDataPage />} />
                 {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             </Routes>
         </BrowserRouter>
