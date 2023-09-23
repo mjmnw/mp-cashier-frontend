@@ -1,16 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import MenuPage from "./Pages/MenuPage";
-import LoginPage from "./Pages/LoginPage";
-import Dashboard from "./Pages/Dashboard";
+import LoginPage from "./Pages/LoginPage/index";
+import SentResetPasswordPage from "./Pages/SentResetPasswordPage";
+import HomePageCashier from "./Pages/HomePage/Cashier/index";
+import Dashboard from "./Pages/ReportPage";
+import FullFeaturedCrudGrid from "./Pages/ProfilePage/AdminProfilePage";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<MenuPage />} />
+                <Route path="/" element={<HomePageCashier />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/resetpassword" element={<SentResetPasswordPage />} />
+                <Route path="/report" element={<Dashboard />} />
+                <Route path="/admins" element={<FullFeaturedCrudGrid />} />
+                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             </Routes>
         </BrowserRouter>
     );

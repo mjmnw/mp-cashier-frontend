@@ -1,4 +1,4 @@
-const ProductCard = (props) => {
+const ProductCardAdmin = (props) => {
     function formatCurrency(price) {
         const formattedPrice = new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -10,7 +10,7 @@ const ProductCard = (props) => {
 
     return (
         <div>
-            <div className="static h-[385px] w-[250px] border pl-5 pr-5 flex flex-col border-yellow-500 rounded-xl shadow-xl">
+            <div className="static h-[385px] w-[250px] border pl-5 pr-5 flex flex-col border-green-600 rounded-xl shadow-xl">
                 <div className="rounded-xl h-[180px]">
                     <img
                         className="w-[210px] h-[150px] rounded-xl border mt-4"
@@ -28,13 +28,10 @@ const ProductCard = (props) => {
                     <div className="flex items-center text-2xl justify-center">
                         {formatCurrency(props.product_price)}
                     </div>
-                    <button className="flex items-center w-[125px] h-[30px] rounded-xl border justify-center ml-10 mt-3 bg-yellow-500 hover:bg-gray-800 text-white text-xs">
-                        Add To Cart
-                    </button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ProductCard;
+export default ProductCardAdmin;
