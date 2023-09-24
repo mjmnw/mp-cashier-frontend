@@ -8,6 +8,7 @@ import UserDataPage from "./Pages/UserDataPage";
 import EditUserDataPage from "./Pages/EditUserDataPage";
 import ProductsListPage from "./Pages/AdminProductsListPage";
 import TransactionPage from "./Pages/TransactionPage";
+import BiodataPage from "./Pages/BiodataPage";
 import { Provider } from "react-redux";
 import { store } from "../src/Redux/Store";
 import KeepLogin from "./Providers/KeepLogin";
@@ -47,6 +48,10 @@ function App() {
                             <Route
                                 path="/transaction"
                                 element={<TransactionPage />}
+                            />
+                            <Route
+                                path="/biodata"
+                                element={<BiodataPage />}
                             />
                             {/* <Route path="/dashboard" element={<Dashboard />} /> */}
                         </Routes>
