@@ -7,13 +7,22 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { BiArrowBack } from "react-icons/bi";
+import CartCard from "../../Components/CartCard/CartCard";
 
 export default function TransactionPage({ products }) {
     const navigate = useNavigate();
     const userSelector = useSelector((state) => state.auth);
-    const [details, setDetails] = useState([]);
     const [carts, setCarts] = useState([]);
     const [change, setChange] = useState(0);
+
+    function formatCurrency(price) {
+        const formattedPrice = new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            minimumFractionDigits: 0,
+        }).format(price);
+        return formattedPrice;
+    }
 
     const getCarts = async () => {
         try {
@@ -34,6 +43,11 @@ export default function TransactionPage({ products }) {
     const createTransaction = async () => {
         try {
             for (let i = 0; i < carts.length; i++) {
+                if (parseInt(inputValue) < totalAll) {
+                    alert("Transaction Failed: Insufficient funds");
+                    return;
+                }
+
                 await axiosInstance.post("/transaction/add-new-transaction", {
                     users_id: userSelector.id,
                     transaction_total_price: totalCartValue,
@@ -41,7 +55,9 @@ export default function TransactionPage({ products }) {
                     cart_quantity: carts[i].cart_quantity,
                     products_id: carts[i].product.id,
                 });
-                navigate("/transaction");
+
+                await axiosInstance.delete(`/cart/delete-cart/user=${userSelector.id}`)
+                navigate("/cashier/home");
             }
         } catch (error) {
             console.log(error);
@@ -50,9 +66,7 @@ export default function TransactionPage({ products }) {
 
     const calculateChange = (inputValue) => {
         let changes = 0;
-
-        changes = totalCartValue - parseInt(inputValue);
-
+        changes = totalAll - parseInt(inputValue);
         setChange(changes);
     };
 
@@ -79,11 +93,32 @@ export default function TransactionPage({ products }) {
         }
     }, [userSelector.id]);
 
+    const goHomePage = () => {
+        navigate("/cashier/home");
+    };
+
+    let totalProductPrice = 0;
+    let totalQuantity = 0;
+
+    carts.forEach((value) => {
+        totalProductPrice +=
+            parseInt(value.product.product_price) * value.cart_quantity;
+        totalQuantity += value.cart_quantity;
+    });
+
+    let totalPPN = totalProductPrice / 10;
+
+    let totalAll = totalProductPrice + totalPPN;
+    let inputValue = "";
+
     return (
         <div className="w-screen h-screen">
             <div className="w-full border border-transparent border-b-neutral-300">
                 <button className="flex items-center gap-2 m-8 ">
-                    <BiArrowBack className="text-neutral-500" />
+                    <BiArrowBack
+                        className="text-neutral-500"
+                        onClick={goHomePage}
+                    />
                     <span className="text-blue-500 font-bold ">
                         Transaction Detail
                     </span>
@@ -98,32 +133,46 @@ export default function TransactionPage({ products }) {
                     </section>
                     <section>
                         <div className="flex justify-between mx-8 border border-transparent border-b-black pb-4 mb-4">
-                            <div>Item</div>
-                            <div>QTY</div>
+                            <div>Item Name</div>
+                            <div>Quantity</div>
                             <div>Price</div>
                         </div>
                         <div className="flex flex-col gap-2 h-full border border-transparent border-b-black pb-4 mb-4 mx-8">
-                            <div className="flex justify-between bg-neutral-200 py-4 rounded-lg p-2">
-                                <div>nama Item</div>
-                                <div>jumlah item</div>
-                                <div>harga item</div>
+                            <div className="flex flex-col bg-neutral-200 py-4 rounded-lg p-2">
+                                {carts.map((value, index) => {
+                                    return (
+                                        <tr key={value.id}>
+                                            <td>
+                                                {value.product.product_name}
+                                            </td>
+                                            <td>{value.cart_quantity}</td>
+                                            <td>
+                                                {value.product.product_price}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </div>
                         </div>
                     </section>
                     <section className="flex flex-col gap-2 border border-transparent border-b-black pb-4 mb-4 mx-8">
                         <div className="flex justify-between ">
-                            <span>items</span>
-                            <span>jumlah items</span>
+                            <span>Quantity</span>
+                            <span>{totalQuantity}</span>
+                        </div>
+                        <div className="flex justify-between ">
+                            <span>PPN 10%</span>
+                            <span>{formatCurrency(totalPPN)}</span>
                         </div>
                         <div className="flex justify-between ">
                             <span>Subtotal</span>
-                            <span>Total Harga</span>
+                            <span>{formatCurrency(totalProductPrice)}</span>
                         </div>
                     </section>
                     <section className="flex flex-col mx-8">
                         <div className="flex justify-between text-blue-500 font-bold text-lg">
                             <span>Total</span>
-                            <span>Total Harga</span>
+                            <span>{formatCurrency(totalAll)}</span>
                         </div>
                     </section>
                 </div>
@@ -139,11 +188,30 @@ export default function TransactionPage({ products }) {
                                 Cash
                             </span>
                             <span>Input Amount</span>
-                            <input className="border border-neutral-300 w-60 h-10 rounded-lg"></input>
+                            <TextField
+                                onChange={(e) =>
+                                    (inputValue =e.target.value)
+                                }
+                            />
                         </div>
                     </section>
+                    {/* <div className="flex flex-row ml-6 font-bold">
+                        Change:
+                        {!isNaN(change) && (
+                            <section className="ml-5">
+                                <Typography>
+                                    {formatCurrency(change)}
+                                </Typography>
+                            </section>
+                        )}
+                    </div> */}
                     <section className="mx-6 my-4">
-                        <button className="w-full bg-blue-500 p-2 rounded-lg text-white font-bold">Charge</button>
+                        <button
+                            className="w-full bg-blue-500 p-2 rounded-lg text-white font-bold"
+                            onClick={createTransaction}
+                        >
+                            Pay
+                        </button>
                     </section>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import { CgSearchLoading } from "react-icons/cg";
 import logo from "../../Assets/Logo/Lucy_Sky-removebg-preview.png";
 import { AiOutlineDelete } from "react-icons/ai";
-import BasicSelect from "../BasicSelect/BasicSelect";
 import axiosInstance from "../../config/api";
 import { useSelector } from "react-redux";
 
@@ -39,9 +38,8 @@ const TopBarCashier = ({onNameChange, refreshTotal}) => {
                     <button className="text-neutral-700 rounded-xl p-3 text-xs border border-gray shadow-sm focus:outline-none hover:border-neutral-950 hover:ring-neutral-950 hover:ring-1">
                         Reset Category
                     </button>
-                    <BasicSelect />
                 </div>
-                <div className="ml-24 w-full pr-60 items-center pt-5 pl-14">
+                <div className="ml-64 w-[600px] pr-60 items-center pt-5 pl-14">
                     <div className="flex items-center bg-red-600 rounded-md p-2 pl-6 text-white">
                         <AiOutlineDelete className="pr-3" size={40} />
                         <button className="text-xl" onClick={clearCartHandler}>Clear Cart</button>
