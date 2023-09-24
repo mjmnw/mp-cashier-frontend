@@ -11,7 +11,7 @@ import axiosInstance from "../../config/api";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePageCashier() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [categories, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
     const userSelector = useSelector((state) => state.auth);
@@ -61,12 +61,11 @@ export default function HomePageCashier() {
         }
     };
 
-    const totalCartValue = carts.reduce((accumualtor, cart) =>  {
-        return parseInt(accumualtor) + parseInt(cart.product.product_price)
-    }, 0 )
+    const totalCartValue = carts.reduce((accumualtor, cart) => {
+        return parseInt(accumualtor) + parseInt(cart.product.product_price);
+    }, 0);
 
     // console.log(carts)
-
 
     const createTransaction = async () => {
         try {
@@ -78,7 +77,7 @@ export default function HomePageCashier() {
                     cart_quantity: carts[i].cart_quantity,
                     products_id: carts[i].product.id,
                 });
-                navigate("/transaction")
+                navigate("/transaction");
             }
         } catch (error) {
             console.log(error);
@@ -102,57 +101,70 @@ export default function HomePageCashier() {
         <div className="border bg-white h-[715px]">
             <NavbarCashier />
             <TopBar onNameChange={handleSearchProduct} />
-            <div className="ml-20 flex flex-row">
-                <div className="flex flex-col">
-                    <div className="flex flex-row gap-5 overflow-x-auto style-scrollbar h-[60px] w-[924px] text-black">
-                        {categories.map((value, index) => {
-                            return (
-                                <div key={index}>
-                                    <CategoryCard
-                                        id={value.id}
-                                        name={value.product_category}
-                                        onClick={setSelectedCategory}
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <div className="mt-2 h-[485px] w-[1000px]">
-                        <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full">
-                            {products.map((value, index) => {
+            <div>
+                <div className="ml-20 flex flex-row">
+                    <div className="flex flex-col">
+                        <div className="flex flex-row gap-5 overflow-x-auto style-scrollbar h-[60px] w-[924px] text-black">
+                            {categories.map((value, index) => {
                                 return (
                                     <div key={index}>
-                                        <ProductCard
-                                            product_id={value.id}
-                                            product_name={value.product_name}
-                                            product_image={value.product_image}
-                                            product_description={
-                                                value.product_description
-                                            }
-                                            product_price={value.product_price}
-                                            refreshCart={getCarts}
+                                        <CategoryCard
+                                            id={value.id}
+                                            name={value.product_category}
+                                            onClick={setSelectedCategory}
                                         />
                                     </div>
                                 );
                             })}
                         </div>
+                        <div className="mt-2 h-[485px] w-[1000px]">
+                            <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full font-xs">
+                                {products.map((value, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <ProductCard
+                                                product_id={value.id}
+                                                product_name={
+                                                    value.product_name
+                                                }
+                                                product_image={
+                                                    value.product_image
+                                                }
+                                                product_description={
+                                                    value.product_description
+                                                }
+                                                product_price={
+                                                    value.product_price
+                                                }
+                                                refreshCart={getCarts}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
+                    <div className="w-full border-2 ml-3 rounded-xl pt-3">
+                        {carts.map((value, index) => {
+                            return (
+                                <CartCard
+                                    key={value.id}
+                                    product_id={value.product.id}
+                                    product_image={value.product.product_image}
+                                    product_name={value.product.product_name}
+                                    product_price={value.product.product_price}
+                                    quantity={value.cart_quantity}
+                                />
+                            );
+                        })}
+                    </div>
+                    <button
+                        onClick={createTransaction}
+                        className="bg-blue-500 p-3 rounded-xl"
+                    >
+                        Process Transaction
+                    </button>
                 </div>
-                <div className="w-full border-2 ml-3 rounded-xl pt-3">
-                    {carts.map((value, index) => {
-                        return (
-                            <CartCard
-                                key={value.id}
-                                product_id={value.product.id}
-                                product_image={value.product.product_image}
-                                product_name={value.product.product_name}
-                                product_price={value.product.product_price}
-                                quantity={value.cart_quantity}
-                            />
-                        );
-                    })}
-                </div>
-                <button onClick={createTransaction}>asdf</button>
             </div>
         </div>
     );
