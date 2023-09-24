@@ -56,7 +56,9 @@ export default function TransactionPage({ products }) {
                     products_id: carts[i].product.id,
                 });
 
-                await axiosInstance.delete(`/cart/delete-cart/user=${userSelector.id}`)
+                await axiosInstance.delete(
+                    `/cart/delete-cart/user=${userSelector.id}`
+                );
                 navigate("/cashier/home");
             }
         } catch (error) {
@@ -138,21 +140,24 @@ export default function TransactionPage({ products }) {
                             <div>Price</div>
                         </div>
                         <div className="flex flex-col gap-2 h-full border border-transparent border-b-black pb-4 mb-4 mx-8">
-                            <div className="flex flex-col bg-neutral-200 py-4 rounded-lg p-2">
-                                {carts.map((value, index) => {
-                                    return (
-                                        <tr key={value.id}>
-                                            <td>
+                            {carts.map((value, index) => {
+                                return (
+                                    <div className="flex flex-col bg-neutral-200 py-4 rounded-lg p-2">
+                                        <div
+                                            className="flex justify-between bg-neutral-200 py-4 rounded-lg p-2"
+                                            key={value.id}
+                                        >
+                                            <div>
                                                 {value.product.product_name}
-                                            </td>
-                                            <td>{value.cart_quantity}</td>
-                                            <td>
+                                            </div>
+                                            <div>{value.cart_quantity}</div>
+                                            <div>
                                                 {value.product.product_price}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </section>
                     <section className="flex flex-col gap-2 border border-transparent border-b-black pb-4 mb-4 mx-8">
@@ -189,9 +194,7 @@ export default function TransactionPage({ products }) {
                             </span>
                             <span>Input Amount</span>
                             <TextField
-                                onChange={(e) =>
-                                    (inputValue =e.target.value)
-                                }
+                                onChange={(e) => (inputValue = e.target.value)}
                             />
                         </div>
                     </section>
