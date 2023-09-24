@@ -5,6 +5,7 @@ import SentResetPasswordPage from "./Pages/SentResetPasswordPage";
 import HomePageCashier from "./Pages/HomePage/Cashier/index";
 import Dashboard from "./Pages/ReportPage";
 import FullFeaturedCrudGrid from "./Pages/ProfilePage/AdminProfilePage";
+import CashierProfilePage from "./Pages/ProfilePage/CashierProfilePage";
 
 function App() {
     return (
@@ -15,6 +16,8 @@ function App() {
                 <Route path="/resetpassword" element={<SentResetPasswordPage />} />
                 <Route path="/report" element={<Dashboard />} />
                 <Route path="/admins" element={<FullFeaturedCrudGrid />} />
+                <Route path="/cashier" element={<CashierProfilePage />} />
+                
                 {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             </Routes>
         </BrowserRouter>
