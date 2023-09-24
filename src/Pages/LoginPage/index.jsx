@@ -49,6 +49,7 @@ export default function LandingPage() {
             }
         } catch (error) {
             if (error.response.data.isError === true) {
+                const mes = "No User Found!"
                 alert(error.response.data.message);
             } else {
                 console.log(error);
