@@ -9,20 +9,23 @@ import "./index.css";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../config/api";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import TotalCard from "../../Components/TotalCard/TotalCard";
 
 export default function HomePageCashier() {
     const navigate = useNavigate();
+    const userSelector = useSelector((state) => state.auth);
     const [categories, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
-    const userSelector = useSelector((state) => state.auth);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [userInput, setUserInput] = useState("");
     const [carts, setCarts] = useState([]);
+    const [userCarts, setUserCarts] = useState([]);
 
     const handleSearchProduct = useCallback(
         _.debounce((value) => {
             setUserInput(value);
-        }, 1500),
+        }, 500),
         []
     );
 
@@ -41,6 +44,9 @@ export default function HomePageCashier() {
                 params: {
                     selectedCategory: selectedCategory,
                     searchProduct: userInput,
+                    _limit: 10,
+                    _sortDir: "ASC",
+                    _sortBy: "product_name",
                 },
             });
             setProducts(res.data.result.rows);
@@ -54,35 +60,27 @@ export default function HomePageCashier() {
             const res = await axiosInstance.get(
                 `/cart/get-cart/${userSelector.id}`
             );
-
             setCarts(res.data.data);
         } catch (error) {
             console.log(error);
         }
     };
 
-    const totalCartValue = carts.reduce((accumualtor, cart) => {
-        return parseInt(accumualtor) + parseInt(cart.product.product_price);
-    }, 0);
-
-    // console.log(carts)
-
-    const createTransaction = async () => {
+    const getUserCarts = async () => {
         try {
-            for (let i = 0; i < carts.length; i++) {
-                await axiosInstance.post("/transaction/add-new-transaction", {
-                    users_id: userSelector.id,
-                    transaction_total_price: totalCartValue,
-                    transaction_status: "PENDING",
-                    cart_quantity: carts[i].cart_quantity,
-                    products_id: carts[i].product.id,
-                });
-                navigate("/transaction");
-            }
+            const res = await axiosInstance.get(
+                `cart/get-cart/${userSelector.id}`
+            );
+            setUserCarts(res.data.data);
         } catch (error) {
             console.log(error);
         }
     };
+
+    const directToTransaction = () => {
+        navigate("/transaction");
+    };
+
     useEffect(() => {
         if (userSelector.id) {
             getCarts();
@@ -97,54 +95,68 @@ export default function HomePageCashier() {
         getProducts();
     }, [selectedCategory, userInput]);
 
+    useEffect(() => {
+        getUserCarts();
+    }, []);
+
+    let totalProductPrice = 0;
+    let totalQuantity = 0;
+
+    carts.forEach((value) => {
+        totalProductPrice +=
+            parseInt(value.product.product_price) * value.cart_quantity;
+        totalQuantity += value.cart_quantity;
+    });
+
+    const totalCard = (
+        <TotalCard product_price={totalProductPrice} quantity={totalQuantity} />
+    );
+
     return (
         <div className="border bg-white h-[715px]">
             <NavbarCashier />
-            <TopBar onNameChange={handleSearchProduct} />
-            <div>
-                <div className="ml-20 flex flex-row">
-                    <div className="flex flex-col">
-                        <div className="flex flex-row gap-5 overflow-x-auto style-scrollbar h-[60px] w-[924px] text-black">
-                            {categories.map((value, index) => {
+            <TopBar
+                onNameChange={handleSearchProduct}
+                refreshTotal={getProducts}
+            />
+            <div className="ml-20 flex flex-row">
+                <div className="flex flex-col">
+                    <div className="flex flex-row gap-5 overflow-x-auto style-scrollbar h-[60px] w-[924px] text-black">
+                        {categories.map((value, index) => {
+                            return (
+                                <div key={index}>
+                                    <CategoryCard
+                                        id={value.id}
+                                        name={value.product_category}
+                                        onClick={setSelectedCategory}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className="mt-2 h-[485px] w-[1000px]">
+                        <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full">
+                            {products.map((value, index) => {
                                 return (
                                     <div key={index}>
-                                        <CategoryCard
-                                            id={value.id}
-                                            name={value.product_category}
-                                            onClick={setSelectedCategory}
+                                        <ProductCard
+                                            product_id={value.id}
+                                            product_name={value.product_name}
+                                            product_image={value.product_image}
+                                            product_description={
+                                                value.product_description
+                                            }
+                                            product_price={value.product_price}
+                                            refreshCart={getCarts}
                                         />
                                     </div>
                                 );
                             })}
                         </div>
-                        <div className="mt-2 h-[485px] w-[1000px]">
-                            <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full font-xs">
-                                {products.map((value, index) => {
-                                    return (
-                                        <div key={index}>
-                                            <ProductCard
-                                                product_id={value.id}
-                                                product_name={
-                                                    value.product_name
-                                                }
-                                                product_image={
-                                                    value.product_image
-                                                }
-                                                product_description={
-                                                    value.product_description
-                                                }
-                                                product_price={
-                                                    value.product_price
-                                                }
-                                                refreshCart={getCarts}
-                                            />
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
                     </div>
-                    <div className="w-full border-2 ml-3 rounded-xl pt-3">
+                </div>
+                <div className="flex flex-col gap-5">
+                    <div className="w-full h-[290px] border-2 ml-3 rounded-xl pt-3 overflow-y-auto no-scrollbar">
                         {carts.map((value, index) => {
                             return (
                                 <CartCard
@@ -158,12 +170,25 @@ export default function HomePageCashier() {
                             );
                         })}
                     </div>
-                    <button
-                        onClick={createTransaction}
-                        className="bg-blue-500 p-3 rounded-xl"
+                    <div>{totalCard}</div>
+                    <Button
+                        onClick={directToTransaction}
+                        sx={{
+                            fontSize: "18px",
+                            height: "80px",
+                            border: "1px solid",
+                            borderRadius: "16px",
+                            marginLeft: 3,
+                            backgroundColor: "#FBC02D",
+                            "&:hover": {
+                                border: "1px solid",
+                                backgroundColor: "#263238",
+                            },
+                            color: "white",
+                        }}
                     >
-                        Process Transaction
-                    </button>
+                        Proceed To Transaction
+                    </Button>
                 </div>
             </div>
         </div>

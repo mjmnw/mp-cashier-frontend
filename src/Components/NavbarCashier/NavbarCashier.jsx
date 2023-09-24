@@ -19,7 +19,7 @@ export default function NavbarCashier() {
         <>
             <aside className="compact-nav fixed group overflow-hidden left-0 top-0 z-10 h-screen w-[calc(3.73rem)] bg-color-5 hover:w-56 hover:shadow-2xl shadow-2xl">
                 <div className="h-full flex flex-col justify-between">
-                    <div className="">
+                    <div>
                         <div className="h-16 border-b border-gray-300/40 flex items-center">
                             <a
                                 href="/cashier/home"

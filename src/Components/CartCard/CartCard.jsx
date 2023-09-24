@@ -1,8 +1,4 @@
 import RoundButton from "../RoundButton/RoundButton";
-import Logo from "../../Assets/Logo/Lucy_Sky-removebg-preview.png";
-import { useEffect, useState } from "react";
-import axiosInstance from "../../config/api";
-import { useSelector } from "react-redux";
 
 const CartCard = ({
     product_id,
@@ -36,13 +32,11 @@ const CartCard = ({
 
                     <div className="">
                         <div className="mt-2">
-                            <div className="font-black text-lg">
-                                Glenlivet 18 YO
+                            <div className="font-black text-xs mb-5">
                                 {product_name}
                             </div>
-                            <div>
+                            <div className="text-md">
                                 {formatCurrency(product_price)}
-                                {formatCurrency(12032948)}
                             </div>
                         </div>
                         <div className="flex gap-5 mt-2">
