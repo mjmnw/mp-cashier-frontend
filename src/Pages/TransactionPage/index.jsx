@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
+import { BiArrowBack } from "react-icons/bi";
 
 export default function TransactionPage({ products }) {
     const navigate = useNavigate();
@@ -79,45 +80,73 @@ export default function TransactionPage({ products }) {
     }, [userSelector.id]);
 
     return (
-        <div>
-            <TopBarCashier />
-
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                    <Box
-                        flex
-                        flexDirection="row"
-                        gap={1}
-                        flexWrap="wrap"
-                        border="1px solid red"
-                        // width="fit-content"
-                    >
-                        {carts.map((value, index) => {
-                            console.log(carts);
-                            return (
-                                <ProductCard
-                                    key={value.id}
-                                    product_id={value.id}
-                                    product_name={value.product.product_name}
-                                    product_image={value.product.product_image}
-                                    product_description={
-                                        value.product.product_description
-                                    }
-                                    product_price={value.product.product_price}
-                                />
-                            );
-                        })}
-                    </Box>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Typography>{totalCartValue.toLocaleString()}</Typography>
-                    <TextField
-                        onChange={(e) => calculateChange(e.target.value)}
-                    />
-                    <Typography>Change: {change}</Typography>
-                </Grid>
-            </Grid>
-            <button onClick={createTransaction}>asdf</button>
+        <div className="w-screen h-screen">
+            <div className="w-full border border-transparent border-b-neutral-300">
+                <button className="flex items-center gap-2 m-8 ">
+                    <BiArrowBack className="text-neutral-500" />
+                    <span className="text-blue-500 font-bold ">
+                        Transaction Detail
+                    </span>
+                </button>
+            </div>
+            <div className="grid grid-cols-5 ">
+                <div className="col-span-3">
+                    <section className="my-4 mx-8">
+                        <span className="text-blue-500 font-bold text-lg">
+                            Summary
+                        </span>
+                    </section>
+                    <section>
+                        <div className="flex justify-between mx-8 border border-transparent border-b-black pb-4 mb-4">
+                            <div>Item</div>
+                            <div>QTY</div>
+                            <div>Price</div>
+                        </div>
+                        <div className="flex flex-col gap-2 h-full border border-transparent border-b-black pb-4 mb-4 mx-8">
+                            <div className="flex justify-between bg-neutral-200 py-4 rounded-lg p-2">
+                                <div>nama Item</div>
+                                <div>jumlah item</div>
+                                <div>harga item</div>
+                            </div>
+                        </div>
+                    </section>
+                    <section className="flex flex-col gap-2 border border-transparent border-b-black pb-4 mb-4 mx-8">
+                        <div className="flex justify-between ">
+                            <span>items</span>
+                            <span>jumlah items</span>
+                        </div>
+                        <div className="flex justify-between ">
+                            <span>Subtotal</span>
+                            <span>Total Harga</span>
+                        </div>
+                    </section>
+                    <section className="flex flex-col mx-8">
+                        <div className="flex justify-between text-blue-500 font-bold text-lg">
+                            <span>Total</span>
+                            <span>Total Harga</span>
+                        </div>
+                    </section>
+                </div>
+                <div className="col-span-2 border border-neutral-300 bg-neutral-100">
+                    <section className="my-4 mb-4 mx-8">
+                        <span className="text-blue-500 font-bold text-4xl">
+                            Payment
+                        </span>
+                    </section>
+                    <section>
+                        <div className="flex flex-col mx-6 my-4 gap-2 px-2 border border-transparent border-b-neutral-300 pb-4">
+                            <span className="text-blue-500 font-bold text-lg">
+                                Cash
+                            </span>
+                            <span>Input Amount</span>
+                            <input className="border border-neutral-300 w-60 h-10 rounded-lg"></input>
+                        </div>
+                    </section>
+                    <section className="mx-6 my-4">
+                        <button className="w-full bg-blue-500 p-2 rounded-lg text-white font-bold">Charge</button>
+                    </section>
+                </div>
+            </div>
         </div>
     );
 }

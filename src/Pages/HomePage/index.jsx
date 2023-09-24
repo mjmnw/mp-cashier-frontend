@@ -139,21 +139,62 @@ const totalCard = (
                             {products.map((value, index) => {
                                 return (
                                     <div key={index}>
-                                        <ProductCard
-                                            product_id={value.id}
-                                            product_name={value.product_name}
-                                            product_image={value.product_image}
-                                            product_description={
-                                                value.product_description
-                                            }
-                                            product_price={value.product_price}
-                                            refreshCart={getCarts}
+                                        <CategoryCard
+                                            id={value.id}
+                                            name={value.product_category}
+                                            onClick={setSelectedCategory}
                                         />
                                     </div>
                                 );
                             })}
                         </div>
+                        <div className="mt-2 h-[485px] w-[1000px]">
+                            <div className="grid grid-cols-3 gap-5 p-5 h-[490px] overflow-y-auto no-scrollbar w-full font-xs">
+                                {products.map((value, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <ProductCard
+                                                product_id={value.id}
+                                                product_name={
+                                                    value.product_name
+                                                }
+                                                product_image={
+                                                    value.product_image
+                                                }
+                                                product_description={
+                                                    value.product_description
+                                                }
+                                                product_price={
+                                                    value.product_price
+                                                }
+                                                refreshCart={getCarts}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
                     </div>
+                    <div className="w-full border-2 ml-3 rounded-xl pt-3">
+                        {carts.map((value, index) => {
+                            return (
+                                <CartCard
+                                    key={value.id}
+                                    product_id={value.product.id}
+                                    product_image={value.product.product_image}
+                                    product_name={value.product.product_name}
+                                    product_price={value.product.product_price}
+                                    quantity={value.cart_quantity}
+                                />
+                            );
+                        })}
+                    </div>
+                    <button
+                        onClick={createTransaction}
+                        className="bg-blue-500 p-3 rounded-xl"
+                    >
+                        Process Transaction
+                    </button>
                 </div>
                 <div className="flex flex-col gap-5">
                     <div className="w-full h-[290px] border-2 ml-3 rounded-xl pt-3 overflow-y-auto no-scrollbar">
