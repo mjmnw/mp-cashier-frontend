@@ -5,10 +5,12 @@ import Cookies from "js-cookie";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../Redux/Reducer/auth";
 
 export default function LandingPage() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleResetPassword = () => {
         navigate("/resetpassword");
@@ -25,11 +27,11 @@ export default function LandingPage() {
             password: yup.string().required("Password is Required"),
         }),
         onSubmit: (values) => {
-            login(values);
+            loginHandler(values);
         },
     });
 
-    const login = async (form) => {
+    const loginHandler = async (form) => {
         try {
             const res = await axiosInstance.post(`/auth/login`, {
                 username: form.username,
@@ -37,24 +39,30 @@ export default function LandingPage() {
             });
 
             Cookies.set("user_token", res.data.result.tokens);
+            Cookies.set("user_data", JSON.stringify(res.data.result.user));
+            dispatch(login(res.data.result.user));
+
+            if (res.data.result.user.users_roles_id === 1) {
+                navigate("/admin/dashboard");
+            } else {
+                navigate("/cashier/home");
+            }
         } catch (error) {
-            console.log(error);
+            if (error.response.data.isError === true) {
+                alert(error.response.data.message);
+            } else {
+                console.log(error);
+            }
         }
     };
 
-    // useEffect(() => {
-    //     if (a) {
-    //         navigate("/");
-    //     }
-    // }, []);
-
     return (
         <div className="flex flex-col bg-white w-full h-screen place-items-center pt-4">
-                <img
-                    src="/image/Lucy_Sky-removebg-preview.png"
-                    className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] object-contain"
-                    alt=""
-                />
+            <img
+                src="/image/Lucy_Sky-removebg-preview.png"
+                className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] object-contain"
+                alt=""
+            />
             <div className="bg-gradient-to-r from-yellow-950 to-yellow-700 flex flex-col pb-2 mt-8 w-[380px] sm:w-[550px] sm:h-[300px]  xl:w-[600px] xl:h-[400px] rounded-xl place-items-center">
                 <h1 className="text-white pt-2 sm:pt-4 text-3xl">Login</h1>
                 <div className="text-white pt-2 text-s text-center">

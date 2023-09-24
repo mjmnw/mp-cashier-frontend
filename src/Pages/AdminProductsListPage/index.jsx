@@ -1,4 +1,4 @@
-import UsersData from "../../Components/UsersDataTable/UsersDataTable";
+import ProductsDataTable from "../../Components/ProductsDataTable/ProductsDataTable";
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -76,7 +76,7 @@ const defaultTheme = createTheme({
     }
 });
 
-export default function UserDataPage() {
+export default function ProductsListPage() {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
@@ -111,7 +111,7 @@ export default function UserDataPage() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            Lucy Sky Users
+                            Lucy Sky Products
                         </Typography>
                         <IconButton color="inherit">
                             <Badge color="secondary">
@@ -164,7 +164,7 @@ export default function UserDataPage() {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <UsersData />
+                                    <ProductsDataTable />
                                 </Paper>
                             </Grid>
                         </Grid>

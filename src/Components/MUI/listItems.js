@@ -5,11 +5,12 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
+import { Storefront } from "@mui/icons-material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
 export const mainListItems = (
     <React.Fragment>
-        <ListItemButton href="http://localhost:3000/dashboard">
+        <ListItemButton href="http://localhost:3000/admin/dashboard">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
@@ -17,11 +18,17 @@ export const mainListItems = (
                 primary="Dashboard"
             />
         </ListItemButton>
-        <ListItemButton>
+        <ListItemButton href="http://localhost:3000/admin/users">
             <ListItemIcon>
                 <PeopleIcon />
             </ListItemIcon>
             <ListItemText primary="Users" />
+        </ListItemButton>
+        <ListItemButton href="http://localhost:3000/admin/products">
+            <ListItemIcon>
+                <Storefront />
+            </ListItemIcon>
+            <ListItemText primary="Products" />
         </ListItemButton>
     </React.Fragment>
 );

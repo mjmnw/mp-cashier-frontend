@@ -4,8 +4,17 @@ import {
     MdOutlineHistory,
 } from "react-icons/md";
 import Logo from "../../Assets/Logo/Lucy_Sky-removebg-preview.png";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarCashier() {
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        Cookies.remove("user_token");
+        navigate("/login");
+    };
+
     return (
         <>
             <aside className="compact-nav fixed group overflow-hidden left-0 top-0 z-10 h-screen w-[calc(3.73rem)] bg-color-5 hover:w-56 hover:shadow-2xl shadow-2xl">
@@ -13,7 +22,7 @@ export default function NavbarCashier() {
                     <div className="">
                         <div className="h-16 border-b border-gray-300/40 flex items-center">
                             <a
-                                href="/"
+                                href="/cashier/home"
                                 className="block w-max px-2.5 flex items-center gap-3 text-color-1 text-l font-bold"
                             >
                                 <img src={Logo} class="h-11" alt="" />
@@ -24,12 +33,33 @@ export default function NavbarCashier() {
                             <ul className="px-1 -ml-px space-y-4 font-medium tracking-wide text-color-1">
                                 <li className="w-max space-y-4 group-hover:w-full">
                                     <a
-                                        href="/"
+                                        href="/cashier/home"
                                         className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
                                     >
                                         <div className="w-max flex items-center px-3 gap-4">
-                                            <MdOutlineLiquor className="h-7 w-7" color="white"/>
-                                            <span className="text-white">Menu</span>
+                                            <MdOutlineLiquor
+                                                className="h-7 w-7"
+                                                color="white"
+                                            />
+                                            <span className="text-white">
+                                                Menu
+                                            </span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li className="w-max space-y-4 group-hover:w-full">
+                                    <a
+                                        href="/cashier/home"
+                                        className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
+                                    >
+                                        <div className="w-max flex items-center px-3 gap-4">
+                                            <MdOutlineSpaceDashboard
+                                                className="h-7 w-7"
+                                                color="white"
+                                            />
+                                            <span className="text-white">
+                                                Dashboard
+                                            </span>
                                         </div>
                                     </a>
                                 </li>
@@ -39,18 +69,10 @@ export default function NavbarCashier() {
                                         className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
                                     >
                                         <div className="w-max flex items-center px-3 gap-4">
-                                            <MdOutlineSpaceDashboard className="h-7 w-7" color="white"/>
-                                            <span className="text-white">Dashboard</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li className="w-max space-y-4 group-hover:w-full">
-                                    <a
-                                        href="/"
-                                        className="block py-3 w-[52px] rounded-full bg-yellow-500 group-hover:w-full hover:bg-gray-800"
-                                    >
-                                        <div className="w-max flex items-center px-3 gap-4">
-                                            <MdOutlineHistory className="h-7 w-7" color="white"/>
+                                            <MdOutlineHistory
+                                                className="h-7 w-7"
+                                                color="white"
+                                            />
                                             <span className="text-white">
                                                 Transactions
                                             </span>
@@ -69,7 +91,10 @@ export default function NavbarCashier() {
                                     alt=""
                                 />
                                 <div>
-                                    <button className="h6 text-gray-600 px-5">
+                                    <button
+                                        className="h6 text-gray-600 px-5"
+                                        onClick={logoutHandler}
+                                    >
                                         Logout
                                     </button>
                                 </div>

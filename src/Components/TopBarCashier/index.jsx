@@ -3,7 +3,7 @@ import logo from "../../Assets/Logo/Lucy_Sky-removebg-preview.png";
 import { AiOutlineDelete } from "react-icons/ai";
 import BasicSelect from "../BasicSelect/BasicSelect";
 
-const TopBar = () => {
+const TopBarCashier = ({onNameChange}) => {
     return (
         <div className="flex flex-col my-6 justify-between pl-20">
             <div className="flex flex-row">
@@ -18,6 +18,7 @@ const TopBar = () => {
                             placeholder="Search products . . ."
                             type="text"
                             name="search"
+                            onChange={(e) => onNameChange(e.target.value)}
                         />
                     </label>
                 </div>
@@ -38,4 +39,4 @@ const TopBar = () => {
     );
 };
 
-export default TopBar;
+export default TopBarCashier;

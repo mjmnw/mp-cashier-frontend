@@ -17,10 +17,10 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Logout from "@mui/icons-material/Logout";
-import { mainListItems, secondaryListItems } from "./listItems";
-import Chart from "./chart";
-import Deposits from "./deposit";
-import Orders from "./orders";
+import { mainListItems, secondaryListItems } from "../../../Components/MUI/listItems";
+import Chart from "../../../Components/MUI/chart";
+import Deposits from "../../../Components/MUI/deposit";
+import Orders from "../../../Components/MUI/orders";
 
 function Copyright(props) {
     return (
@@ -86,10 +86,18 @@ const Drawer = styled(MuiDrawer, {
     },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+    palette: {
+        primary: {
+            main: "#F9A825"
+        },
+        secondary: {
+            main: "#FFFFFF"
+        }
+    }
+});
 
-export default function Dashboard() {
+export default function DashboardAdmin() {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
@@ -102,7 +110,7 @@ export default function Dashboard() {
                 <AppBar position="absolute" open={open}>
                     <Toolbar
                         sx={{
-                            pr: "24px", // keep right padding when drawer closed
+                            pr: "24px",
                         }}
                     >
                         <IconButton

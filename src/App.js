@@ -2,24 +2,58 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./Pages/LoginPage/index";
 import SentResetPasswordPage from "./Pages/SentResetPasswordPage";
-import HomePageCashier from "./Pages/HomePage/Cashier/index";
-import Dashboard from "./Pages/ReportPage";
-import FullFeaturedCrudGrid from "./Pages/ProfilePage/AdminProfilePage";
+import HomePageCashier from "./Pages/HomePage";
+import DashboardAdmin from "./Pages/DashboardPage/Admin";
 import UserDataPage from "./Pages/UserDataPage";
+import EditUserDataPage from "./Pages/EditUserDataPage";
+import ProductsListPage from "./Pages/AdminProductsListPage";
+import TransactionPage from "./Pages/TransactionPage";
+import { Provider } from "react-redux";
+import { store } from "../src/Redux/Store";
+import KeepLogin from "./Providers/KeepLogin";
 
 function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePageCashier />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/resetpassword" element={<SentResetPasswordPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/admins" element={<FullFeaturedCrudGrid />} />
-                <Route path="/userslist" element={<UserDataPage />} />
-                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-            </Routes>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <KeepLogin>
+                    <div className="App">
+                        <Routes>
+                            <Route
+                                path="/cashier/home"
+                                element={<HomePageCashier />}
+                            />
+                            <Route path="/" element={<LoginPage />} />
+                            <Route
+                                path="/resetpassword"
+                                element={<SentResetPasswordPage />}
+                            />
+                            <Route
+                                path="/admin/dashboard"
+                                element={<DashboardAdmin />}
+                            />
+                            <Route
+                                path="/admin/users"
+                                element={<UserDataPage />}
+                            />
+                            <Route
+                                path="/admin/users/edit"
+                                element={<EditUserDataPage />}
+                            />
+                            <Route
+                                path="/admin/products"
+                                element={<ProductsListPage />}
+                            />
+                            <Route
+                                path="/transaction"
+                                element={<TransactionPage />}
+                            />
+                            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                        </Routes>
+                    </div>
+                </KeepLogin>
+            </BrowserRouter>
+        </Provider>
     );
 }
 

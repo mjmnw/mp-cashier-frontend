@@ -1,4 +1,3 @@
-import UsersData from "../../Components/UsersDataTable/UsersDataTable";
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +17,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Logout from "@mui/icons-material/Logout";
 import { mainListItems, secondaryListItems } from "../../Components/MUI/listItems";
+import UsersEditCard from "../../Components/UsersEditCard/UsersEditCard";
+import SelectUser from "../../Components/UserSelectBox/UserSelectBox";
 
 const drawerWidth = 240;
 
@@ -76,7 +77,7 @@ const defaultTheme = createTheme({
     }
 });
 
-export default function UserDataPage() {
+export default function EditUserDataPage() {
     const [open, setOpen] = React.useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
@@ -89,7 +90,7 @@ export default function UserDataPage() {
                 <AppBar position="absolute" open={open}>
                     <Toolbar
                         sx={{
-                            pr: "24px", // keep right padding when drawer closed
+                            pr: "24px",
                         }}
                     >
                         <IconButton
@@ -111,7 +112,7 @@ export default function UserDataPage() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            Lucy Sky Users
+                            Lucy Sky Dashboard
                         </Typography>
                         <IconButton color="inherit">
                             <Badge color="secondary">
@@ -154,6 +155,9 @@ export default function UserDataPage() {
                 >
                     <Toolbar />
                     <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
+                        <SelectUser />
+                    </Container>
+                    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
                         <Grid container spacing={3}>
                             {/* Recent Orders */}
                             <Grid item xs={12}>
@@ -164,7 +168,7 @@ export default function UserDataPage() {
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <UsersData />
+                                    <UsersEditCard />
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -174,4 +178,3 @@ export default function UserDataPage() {
         </ThemeProvider>
     );
 }
-

@@ -5,10 +5,8 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Title from "./Title";
+import Title from "../MUI/Title";
 import axiosInstance from "../../config/api";
-
-// ...
 
 function formatCurrency(price) {
     const formattedPrice = new Intl.NumberFormat("id-ID", {
@@ -18,6 +16,23 @@ function formatCurrency(price) {
     }).format(price);
     return formattedPrice;
 }
+
+function formatDate(birthdate) {
+    const inputDate = new Date(birthdate);
+
+    if (isNaN(inputDate.getTime())) {
+        return "Invalid Date";
+    }
+
+    const year = inputDate.getFullYear();
+    const month = String(inputDate.getMonth() + 1).padStart(2, "0");
+    const day = String(inputDate.getDate()).padStart(2, "0");
+
+    const formattedDate = `${year}-${month}-${day}`;
+
+    return formattedDate;
+}
+
 export default function UsersData() {
     const [userData, setUserData] = useState([]);
 
@@ -39,7 +54,7 @@ export default function UsersData() {
 
     return (
         <React.Fragment>
-            <Title>Recent Orders</Title>
+            <Title>Lucy Sky's Users</Title>
             <Table size="small">
                 <TableHead>
                     <TableRow>
@@ -54,17 +69,16 @@ export default function UsersData() {
                         <TableCell>Salary</TableCell>
                         <TableCell>Role</TableCell>
                         <TableCell>Status</TableCell>
-                        <TableCell align="right">Sale Amount</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {userData.map((row) => (
                         <TableRow key={row.id}>
-                            <TableCell>{row.id}</TableCell>
+                            <TableCell align="center">{row.id}</TableCell>
                             <TableCell>{row.username}</TableCell>
                             <TableCell>{row.fullname}</TableCell>
                             <TableCell>{row.email}</TableCell>
-                            <TableCell>{row.birthdate}</TableCell>
+                            <TableCell>{formatDate(row.birthdate)}</TableCell>
                             <TableCell>{row.phone_number}</TableCell>
                             <TableCell>{row.address}</TableCell>
                             <TableCell>{row.gender}</TableCell>
@@ -78,20 +92,29 @@ export default function UsersData() {
                                     : ""}
                             </TableCell>
                             <TableCell>
-                                {" "}
-                                {row.users_statuses_id === 1
-                                    ? "Active"
-                                    : row.users_statuses_id === 2
-                                    ? "Deactive"
-                                    : ""}
+                                <span
+                                    style={{
+                                        color:
+                                            row.users_statuses_id === 1
+                                                ? "green"
+                                                : row.users_statuses_id === 2
+                                                ? "red"
+                                                : "black",
+                                    }}
+                                >
+                                    {row.users_statuses_id === 1
+                                        ? "Active"
+                                        : row.users_statuses_id === 2
+                                        ? "Deactive"
+                                        : ""}
+                                </span>
                             </TableCell>
-                            <TableCell align="right">{`$${row.amount}`}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-            <Link color="primary" href="#" sx={{ mt: 3 }}>
-                See more orders
+            <Link color="primary" href="http://localhost:3000/admin/users/edit" sx={{ mt: 3 }}>
+                Edit User Data
             </Link>
         </React.Fragment>
     );
